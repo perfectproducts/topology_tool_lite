@@ -1,11 +1,16 @@
 import omni.ext
 import omni.ui as ui
 from omni.kit.window.filepicker import FilePickerDialog
+from .topology_excel import TopologyExcelReaderWriter 
+from .topology_semantics import TopologySemantics 
 
 # Functions and vars are available to other extension as usual in python: `example.python_ext.some_public_function(x)`
 def import_topology_from_excel(stage, path):
     print(f"import topology from excel {path}")
-    
+    topology = TopologyExcelReaderWriter().read(path)
+    TopologySemantics().write(stage, topology)
+
+
 
 # Any class derived from `omni.ext.IExt` in top level module (defined in `python.modules` of `extension.toml`) will be
 # instantiated when extension gets enabled and `on_startup(ext_id)` will be called. Later when extension gets disabled
@@ -49,7 +54,7 @@ class MyExtension(omni.ext.IExt):
 
                 
                 ui.Button("Import Xls...", clicked_fn=on_import_excel_clicked, height=30)
-                ui.Button("Export Xls...", clicked_fn=on_export_excel_clicked, height=30)
+                ui.Button("Export Xls...", clicked_fn=on_export_excel_clicked, height=30, enabled=False, tooltip="not available in lite version")
 
     def on_shutdown(self):
         print("[ai.synctwin.topology_tool_lite] MyExtension shutdown")
