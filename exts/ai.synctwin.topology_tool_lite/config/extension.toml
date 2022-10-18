@@ -13,10 +13,10 @@ readme  = "docs/README.md"
 repository = ""
 
 # One of categories for UI.
-category = "Example"
+category = "Manufacturing"
 
 # Keywords for the extension
-keywords = ["kit", "example"]
+keywords = ["Manufacturing", "synctwin"]
 
 # Icon to show in the extension manager
 icon = "data/icon.png"
